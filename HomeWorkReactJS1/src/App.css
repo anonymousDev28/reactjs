@@ -7,6 +7,9 @@
 ul{
   list-style-type: none
 }
+.hidden {
+  display: none;
+}
 /* .logo {
   height: 6em;
   padding: 1.5em;
