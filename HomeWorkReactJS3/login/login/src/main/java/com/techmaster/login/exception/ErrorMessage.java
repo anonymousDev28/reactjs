@@ -1,4 +1,4 @@
-package com.techmaster.practicerestapi.exception;
+package com.techmaster.login.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

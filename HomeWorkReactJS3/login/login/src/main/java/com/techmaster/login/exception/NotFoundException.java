@@ -1,4 +1,4 @@
-package com.techmaster.practicerestapi.exception;
+package com.techmaster.login.exception;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message) {

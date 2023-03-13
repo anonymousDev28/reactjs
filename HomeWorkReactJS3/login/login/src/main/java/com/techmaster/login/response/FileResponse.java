@@ -1,4 +1,4 @@
-package com.techmaster.practicerestapi.response;
+package com.techmaster.login.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

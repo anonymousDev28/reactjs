@@ -1,6 +1,6 @@
-package com.techmaster.practicerestapi.service;
+package com.techmaster.login.service;
 
-import com.techmaster.practicerestapi.response.FileResponse;
+import com.techmaster.login.response.FileResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {

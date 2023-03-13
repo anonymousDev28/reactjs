@@ -1,4 +1,4 @@
-package com.techmaster.practicerestapi.exception;
+package com.techmaster.login.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

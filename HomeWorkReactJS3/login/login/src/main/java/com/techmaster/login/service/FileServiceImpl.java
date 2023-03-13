@@ -1,8 +1,8 @@
-package com.techmaster.practicerestapi.service;
+package com.techmaster.login.service;
 
-import com.techmaster.practicerestapi.exception.BadRequestException;
-import com.techmaster.practicerestapi.exception.NotFoundException;
-import com.techmaster.practicerestapi.response.FileResponse;
+import com.techmaster.login.exception.BadRequestException;
+import com.techmaster.login.exception.NotFoundException;
+import com.techmaster.login.response.FileResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

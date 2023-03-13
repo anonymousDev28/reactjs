@@ -1,7 +1,7 @@
-package com.techmaster.practicerestapi.controller;
+package com.techmaster.login.controller;
 
-import com.techmaster.practicerestapi.response.FileResponse;
-import com.techmaster.practicerestapi.service.FileServiceImpl;
+import com.techmaster.login.response.FileResponse;
+import com.techmaster.login.service.FileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
