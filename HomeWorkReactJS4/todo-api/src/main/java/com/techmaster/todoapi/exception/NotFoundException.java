@@ -1,4 +1,4 @@
-package com.example.demoapp.exception;
+package com.techmaster.todoapi.exception;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

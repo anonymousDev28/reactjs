@@ -1,13 +1,10 @@
-package com.example.demoapp.service;
+package com.techmaster.todoapi.service;
 
-import com.example.demoapp.exception.BadRequestException;
-import com.example.demoapp.exception.NotFoundException;
-import com.example.demoapp.model.Todo;
-import com.example.demoapp.request.CreateTodoRequest;
-import com.example.demoapp.request.UpdateTodoRequest;
+import com.techmaster.todoapi.dto.TodoDTO;
+import com.techmaster.todoapi.exception.NotFoundException;
+import com.techmaster.todoapi.model.Todo;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,12 +16,9 @@ public class TodoService {
 
     public TodoService() {
         todos =  new ArrayList<>();
-//        todos.add(new Todo(1, "Làm bài tập", true, LocalDateTime.now(), "normal"));
-//        todos.add(new Todo(2, "Đá bóng", true, LocalDateTime.now(), "medium"));
-//        todos.add(new Todo(3, "Đi chơi", false, LocalDateTime.now(), "high"));
-        todos.add(new Todo(1, "Làm bài tập", true));
-        todos.add(new Todo(2, "Đá bóng", true));
-        todos.add(new Todo(3, "Đi chơi", false));
+        todos.add(new Todo(0, "Làm bài tập", true));
+        todos.add(new Todo(1, "Đá bóng", true));
+        todos.add(new Todo(2, "Đi chơi", false));
     }
 
     private int generateId() {
@@ -49,26 +43,12 @@ public class TodoService {
         throw new NotFoundException("Not found todo with id = " + id);
     }
 
-    public Todo createTodo(CreateTodoRequest request) {
-        Todo todo = Todo.builder()
-                .id(generateId())
-                .title(request.getTitle())
-                .status(false)
-//                .createdAt(LocalDateTime.now())
-//                .level(request.getLevel())
-                .build();
-
-        todos.add(todo);
-        return todo;
-    }
-
-    public Todo updateTodo(Integer id, UpdateTodoRequest request) {
+    public Todo updateTodo(TodoDTO todoDTO) {
         for (Todo t: todos) {
-            if(Objects.equals(t.getId(), id)) {
-                t.setTitle(request.getTitle());
-                t.setStatus(request.getStatus());
+            if(Objects.equals(t.getId(), todoDTO.getId())) {
+                t.setTitle(todoDTO.getTitle());
+                t.setStatus(todoDTO.getStatus());
 //                t.setLevel(request.getLevel());
-
                 return t;
             }
         }
@@ -77,5 +57,17 @@ public class TodoService {
 
     public void deleteTodo(Integer id) {
         todos.removeIf(todo -> Objects.equals(todo.getId(), id));
+    }
+
+    public Todo createTodo(TodoDTO todoDTO) {
+        Todo todo = Todo.builder()
+                .id(generateId())
+                .title(todoDTO.getTitle())
+                .status(false)
+//                .createdAt(LocalDateTime.now())
+//                .level(request.getLevel())
+                .build();
+        todos.add(todo);
+        return todo;
     }
 }

@@ -1,8 +1,6 @@
-package com.example.demoapp.model;
+package com.techmaster.todoapi.model;
 
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

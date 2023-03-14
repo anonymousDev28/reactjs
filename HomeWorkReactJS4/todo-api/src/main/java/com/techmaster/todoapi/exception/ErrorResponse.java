@@ -1,4 +1,4 @@
-package com.example.demoapp.exception;
+package com.techmaster.todoapi.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

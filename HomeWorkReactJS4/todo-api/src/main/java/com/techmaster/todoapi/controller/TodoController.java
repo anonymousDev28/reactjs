@@ -1,13 +1,10 @@
-package com.example.demoapp.controller;
+package com.techmaster.todoapi.controller;
 
-import com.example.demoapp.exception.ErrorResponse;
-import com.example.demoapp.exception.NotFoundException;
-import com.example.demoapp.model.Todo;
-import com.example.demoapp.request.CreateTodoRequest;
-import com.example.demoapp.request.UpdateTodoRequest;
-import com.example.demoapp.service.TodoService;
+
+import com.techmaster.todoapi.dto.TodoDTO;
+import com.techmaster.todoapi.model.Todo;
+import com.techmaster.todoapi.service.TodoService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +20,6 @@ public class TodoController {
     public TodoController(TodoService todoService) {
         this.todoService = todoService;
     }
-
-    // Inject Bean
-    // Field
-    // Constructor
-    // Setter
     @GetMapping("todos")
     public List<Todo> getAllTodo() {
         return todoService.getAllTodo();
@@ -48,13 +40,13 @@ public class TodoController {
 
     @PostMapping("todos")
     @ResponseStatus(HttpStatus.CREATED) // 201
-    public Todo createTodo(@Valid @RequestBody CreateTodoRequest request) {
-        return todoService.createTodo(request);
+    public Todo createTodo(@Valid @RequestBody TodoDTO todoDTO) {
+        return todoService.createTodo(todoDTO);
     }
 
-    @PutMapping("todos/{id}")
-    public Todo updateTodo(@PathVariable Integer id, @RequestBody UpdateTodoRequest request) {
-        return todoService.updateTodo(id, request);
+    @PutMapping("todos")
+    public Todo updateTodo(@RequestBody TodoDTO todoDTO) {
+        return todoService.updateTodo(todoDTO);
     }
 
     @DeleteMapping("todos/{id}")
