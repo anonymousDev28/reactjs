@@ -6,26 +6,27 @@ function ToDoList() {
   const [newTask, setNewTask] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/todos")
+      .get("http://localhost:8081/api/todos")
       .then((response) => {
         setTasks(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [tasks]);
+  }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post(`http://localhost:8080/api/todos`, {
+      .post(`http://localhost:8081/api/todos`, {
         title: newTask,
         status: false,
       })
-      .then(() => {
-        if (newTask.trim() !== "") {
-          setTasks([...tasks, { title: newTask, status: false }]);
-          setNewTask("");
-        }
+      .then((response) => {
+        // if (newTask.trim() !== "") {
+        //   setTasks([...tasks, { title: newTask, status: false }]);
+        //   setNewTask("");
+        // }
+        setTasks([...tasks,response.data])
       })
       .catch((error) => {
         console.log(error);
@@ -39,7 +40,7 @@ function ToDoList() {
     console.log(tasks[index]);
     if (newTitle) {
       axios
-        .put(`http://localhost:8080/api/todos`, {
+        .put(`http://localhost:8081/api/todos`, {
           id: taskId,
           title: newTitle,
           status: tasks[index].status,
@@ -56,7 +57,7 @@ function ToDoList() {
   };
   const handleDeleteTask = (index) => {
     axios
-      .delete(`http://localhost:8080/api/todos/${index}`)
+      .delete(`http://localhost:8081/api/todos/${index}`)
       .then(() => {
         const newTasks = [...tasks];
         newTasks.splice(index, 1);
@@ -68,7 +69,7 @@ function ToDoList() {
   };
   const handleChangeStatus = (taskId,index) => {
     axios
-      .put(`http://localhost:8080/api/todos`, {
+      .put(`http://localhost:8081/api/todos`, {
         id: taskId,
         title: tasks[index].title,
         status: !tasks[index].status,
