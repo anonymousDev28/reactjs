@@ -1,8 +1,15 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect } from 'react'
 
 function ProductItem(props) {
-//   const { cartItems } = props;
-    console.log(props)
+    const handleDecrease = async (event) =>{
+        event.preventDefault();
+            axios
+              .put(`http://localhost:8080/api/v1/cartItems/${props.id}/decrement`)
+              .catch((error) => {
+                console.log(error);
+              });
+    }
   return (
     <div>
        <div className="product-item d-flex border mb-4">
@@ -21,9 +28,9 @@ function ProductItem(props) {
                                     </div>
                                     <div className="text-black-50">
                                         <div className="d-inline-block me-3">
-                                            <button className="border py-2 px-3 d-inline-block fw-bold bg-light">-</button>
+                                            <button className="border py-2 px-3 d-inline-block fw-bold bg-light" onClick={(e)=>handleDecrease(e)}>-</button>
                                             <span className="py-2 px-3 d-inline-block fw-bold">{props.course.categories.length}</span>
-                                            <button className="border py-2 px-3 d-inline-block fw-bold bg-light">+</button>
+                                            <button className="border py-2 px-3 d-inline-block fw-bold bg-light" onClick={(e)=>handleIncrease(e)}>+</button>
                                         </div>
                                     </div>
                                 </div>
