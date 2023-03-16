@@ -13,15 +13,9 @@ import java.util.stream.Collectors;
 @Repository
 public class CartItemRepository {
 
-    public List<CartItemDto> findAll() {
-        List<CartItemDto> cartItemDtos = CartDB.cart.stream().map(cartItem -> {
-            CartItemDto cartItemDto =  new CartItemDto();
-            cartItemDto.setId(cartItem.getId());
-            cartItemDto.setCourse(CourseDB.courses.get(cartItem.getCourseId()));
-            cartItemDto.setCount(cartItem.getCount());
-            return cartItemDto;
-        }).collect(Collectors.toList());
-        return cartItemDtos;
+    public List<CartItem> findAll() {
+
+        return CartDB.cart;
     }
 
     public void deleteById(int id) {
@@ -36,6 +30,6 @@ public class CartItemRepository {
 
 
     public CartItem findById(int id) {
-        return CartDB.cart.stream().filter(cartItem1 -> cartItem1.getId() == id).findFirst().orElse(null);
+        return CartDB.cart.stream().filter(cartItem -> cartItem.getId() == id).findFirst().orElse(null);
     }
 }

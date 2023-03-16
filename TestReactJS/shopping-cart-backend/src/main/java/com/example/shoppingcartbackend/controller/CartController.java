@@ -25,7 +25,11 @@ public class CartController {
         cartService.increaseById(id);
     }
     @PutMapping(value = "{id}/decrement")
-    public void puDecreament(@PathVariable int id){
+    public void putDecreament(@PathVariable int id){
         cartService.decreaseById(id);
+    }
+    @GetMapping(value = "total")
+    public Integer getTotal(){
+        return cartService.getTotal();
     }
 }
