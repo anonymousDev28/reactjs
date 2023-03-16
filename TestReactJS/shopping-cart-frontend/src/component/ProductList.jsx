@@ -4,26 +4,31 @@ import ProductItem from './ProductItem';
 
 function ProductList() {
     const [cartItems, setCartItems] = useState([]);
-    useEffect(axios.get('http://localhost:8080/api/v1/cartItems')
-    .then(response => {
-      console.log(response.data);
-      // Thực hiện các thao tác với dữ liệu nhận được từ API ở đây
-    })
-    .catch(error => {
-      console.log(error);
-      // Xử lý lỗi ở đây
-    }),[]);
+    useEffect(() => {
+        axios
+          .get("http://localhost:8080/api/v1/cartItems")
+          .then((response) => {
+            setCartItems(response.data);
+            console.log(response.data)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, []);
     // const products = [
     //     { id: 1, name: 'Product 1',numberItem: 1, price: 10.99 },
     //     { id: 2, name: 'Product 2',numberItem: 1, price: 20.99 },
     //     { id: 3, name: 'Product 3',numberItem: 1, price: 30.99 },
     // ];
+    // setCartItems(products);
   return (
     <div>
         {/* <ProductItem cartItems={products} /> */}
         <div className="product-list">
-                        {/* <ProductItem {cartItems={cartItems}}/> */}
-                        <ProductItem/>
+                        {cartItems.map(item=>(
+                            <ProductItem  {...item}/>
+                        ))}
+                        
                         {/* <div className="product-item d-flex border mb-4">
                             <div className="image">
                                 <img src="https://images.unsplash.com/photo-1612423284934-2850a4ea6b0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGNsb3RoZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60" alt="sản phẩm 2" />
