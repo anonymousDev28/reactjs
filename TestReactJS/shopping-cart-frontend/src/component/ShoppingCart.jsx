@@ -6,9 +6,6 @@ import "bootstrap/dist/js/bootstrap.bundle"
 import "../assets/Shopping-cart.css"
 import BillInformation from './BillInformation';
 function ShoppingCart() {
-//   const addToCart = (product) => {
-    // setCartItems([...cartItems, products]);
-//   };
   return (
     <div>
          <div className="shopping-cart-container mt-5">

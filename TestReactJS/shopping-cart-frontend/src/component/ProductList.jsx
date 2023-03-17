@@ -17,10 +17,9 @@ function ProductList() {
       }, []);
   return (
     <div>
-        {/* <ProductItem cartItems={products} /> */}
         <div className="product-list">
                         {cartItems.map(item=>(
-                            <ProductItem  {...item}/>
+                            <ProductItem key = {item.id}  {...item}/>
                         ))}
                         
                         {/* <div className="product-item d-flex border mb-4">

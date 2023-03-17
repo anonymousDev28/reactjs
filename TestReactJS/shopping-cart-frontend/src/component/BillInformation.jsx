@@ -13,7 +13,7 @@ function BillInformation() {
       .catch((error) => {
         console.log(error);
       });
-  });
+  },[total]);
   return (
     <div>
       <div className="bill">
