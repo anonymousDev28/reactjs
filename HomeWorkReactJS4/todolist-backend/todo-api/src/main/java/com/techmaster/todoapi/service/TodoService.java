@@ -46,19 +46,23 @@ public class TodoService {
         if(todo.isEmpty()){
             throw new NotFoundException("Not found todo with id = " + todoDTO.getId());
         }
-        todo.get().setTitle(todoDTO.getTitle());
-        todo.get().setStatus(todoDTO.getStatus());
-        todoRepository.save(todo.get());
+        Todo todoDummy = todo.get();
+        todoDummy.setTitle(todoDTO.getTitle());
+        todoDummy.setStatus(todoDTO.getStatus());
+        todoRepository.save(todoDummy);
         return new ModelMapper().map(todo.get(), TodoDTO.class);
     }
 
     public void deleteTodo(Integer id) {
+        Optional<Todo> todo= todoRepository.findById(id);
+        if(todo.isEmpty()){
+            throw new NotFoundException("Not found todo with id = " + id);
+        }
         todoRepository.deleteById(id);
     }
 
     public TodoDTO createTodo(TodoDTO todoDTO) {
         Todo todo = Todo.builder()
-                .id(generateId())
                 .title(todoDTO.getTitle())
                 .status(false)
                 .build();
