@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -33,41 +34,35 @@ public class TodoService {
     // message, path, time, ...
     // status : mã lỗi
     public TodoDTO getTodoById(Integer id) {
-        List<Todo> todos = todoRepository.findAll();
-        for (Todo t: todos) {
-            if(Objects.equals(t.getId(), id)) {
-
-                return new ModelMapper().map(t, TodoDTO.class);
-            }
+        Optional<Todo> todo= todoRepository.findById(id);
+        if(todo.isEmpty()){
+            throw new NotFoundException("Not found todo with id = " + id);
         }
-        throw new NotFoundException("Not found todo with id = " + id);
+        return new ModelMapper().map(todo.get(), TodoDTO.class);
     }
 
     public TodoDTO updateTodo(TodoDTO todoDTO) {
-        List<Todo> todos = todoRepository.findAll();
-        for (Todo t: todos) {
-            if(Objects.equals(t.getId(), todoDTO.getId())) {
-                t.setTitle(todoDTO.getTitle());
-                t.setStatus(todoDTO.getStatus());
-                return new ModelMapper().map(t, TodoDTO.class);
-            }
+        Optional<Todo> todo= todoRepository.findById(todoDTO.getId());
+        if(todo.isEmpty()){
+            throw new NotFoundException("Not found todo with id = " + todoDTO.getId());
         }
-        return null;
+        todo.get().setTitle(todoDTO.getTitle());
+        todo.get().setStatus(todoDTO.getStatus());
+        todoRepository.save(todo.get());
+        return new ModelMapper().map(todo.get(), TodoDTO.class);
     }
 
     public void deleteTodo(Integer id) {
-        List<Todo> todos = todoRepository.findAll();
-        todos.removeIf(todo -> Objects.equals(todo.getId(), id));
+        todoRepository.deleteById(id);
     }
 
     public TodoDTO createTodo(TodoDTO todoDTO) {
-        List<Todo> todos = todoRepository.findAll();
         Todo todo = Todo.builder()
                 .id(generateId())
                 .title(todoDTO.getTitle())
                 .status(false)
                 .build();
-        todos.add(todo);
+        todoRepository.save(todo);
         return new ModelMapper().map(todo, TodoDTO.class);
     }
 }
